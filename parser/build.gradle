@@ -24,6 +24,7 @@ generateGrammarSource {
     arguments += ["-package", "com.hippo.kotlin.antlr"]
 }
 
+// Copy these tokens file to make intellij antlr plugin happy
 task copyTokens(type: Copy) {
     from "build/generated-src/antlr/main"
     into "src/main/gen"
