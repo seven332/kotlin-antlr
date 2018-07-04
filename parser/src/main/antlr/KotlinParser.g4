@@ -372,7 +372,7 @@ labeledExpression
     ;
 
 dotQualifiedExpression
-    : assignableExpression (NL* memberAccessOperator postfixUnaryExpression)+
+    : ( assignableExpression | callExpression | labeledExpression | assignableExpression postfixUnaryOperator* | LPAREN callableReference RPAREN postfixUnaryOperator+ | callableReference ) (NL* memberAccessOperator postfixUnaryExpression)+
     ;
 
 assignableExpression
