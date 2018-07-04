@@ -24,11 +24,22 @@ generateGrammarSource {
     arguments += ["-package", "com.hippo.kotlin.antlr"]
 }
 
-// Copy these tokens file to make intellij antlr plugin happy
-task copyTokens(type: Copy) {
+task copyGrammarSource(type: Copy) {
+    from "build/generated-src/antlr/main"
+    into "src/main/java-gen/com/hippo/kotlin/antlr"
+    include "*.java"
+}
+
+task copyGrammarToken(type: Copy) {
     from "build/generated-src/antlr/main"
     into "src/main/gen"
     include "*.tokens"
 }
 
-generateGrammarSource.finalizedBy copyTokens
+copyGrammarSource.dependsOn generateGrammarSource
+copyGrammarToken.dependsOn copyGrammarSource
+compileJava.dependsOn copyGrammarToken
+
+sourceSets.main.java.srcDirs = ['src/main/java-gen']
+
+apply from: rootProject.file('maven-gradle.gradle')
