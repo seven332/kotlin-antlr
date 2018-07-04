@@ -734,7 +734,11 @@ annotations
 
 annotation
     : annotationUseSiteTarget NL* COLON NL* unescapedAnnotation
-    | LabelReference (NL* typeArguments)? (NL* valueArguments)?
+    | annotationIdentifier (NL* typeArguments)? (NL* valueArguments)?
+    ;
+
+annotationIdentifier
+    : LabelReference ( NL* DOT identifier )?
     ;
 
 annotationList
