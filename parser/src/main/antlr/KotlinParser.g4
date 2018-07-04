@@ -292,7 +292,7 @@ declaration
     ;
 
 assignment
-    : assignableExpression assignmentOperator NL* disjunction
+    : disjunction assignmentOperator NL* disjunction
     ;
 
 expression
